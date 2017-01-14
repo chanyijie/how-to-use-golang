@@ -1,6 +1,7 @@
 package downloadutils
 
 import (
+	"crypto/tls"
 	"fmt"
 	"io"
 	"log"
@@ -28,7 +29,15 @@ func DownloadHttpFiles(urls []string) (int, error) {
 			}
 			defer output.Close()
 
-			res, err := http.Get(url)
+			// handle https request
+			// create new http transport
+			transPort := &http.Transport{
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			}
+			client := &http.Client{Transport: transPort}
+
+			//res, err := http.Get(url)
+			res, err := client.Get(url)
 			if err != nil {
 				log.Fatal("http get error: ", err)
 			} else {
