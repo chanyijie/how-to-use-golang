@@ -1,4 +1,4 @@
-package downloadutils
+package download
 
 import (
 	"crypto/tls"
@@ -35,6 +35,7 @@ func DownloadHttpFiles(urls []string) (int, error) {
 			// handle https request
 			// create new http transport
 			transPort := &http.Transport{
+				Proxy:           http.ProxyFromEnvironment,
 				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 			}
 			// create new http client with the defined transport above

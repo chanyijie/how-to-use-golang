@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	du "github.com/nevermosby/how-to-use-golang/downloadutils"
+	du "github.com/nevermosby/how-to-use-golang/utils/download"
 )
 
 func main() {
